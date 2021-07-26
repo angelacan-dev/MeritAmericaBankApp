@@ -1,0 +1,913 @@
+---
+swagger: "2.0"
+info:
+  description: REST API Design Documentation
+  version: "1.0"
+  title: MeritAmerica Bank API
+  termsOfService: Free to Use
+  contact:
+    name: Irina Babkina
+    url: http://localhost:8080/swagger-ui.html
+    email: ibabkina700@gmail.com
+  license:
+    name: API Licence
+    url: http://meritamericabank.com
+host: localhost:8080
+basePath: /
+tags:
+- name: account-holder-controller
+  description: Account Holder Controller
+- name: bank-account-controller
+  description: Bank Account Controller
+- name: cd-offering-controller
+  description: CD Offering Controller
+- name: login-controller
+  description: Login Controller
+- name: user-account-controller
+  description: User Account Controller
+- name: user-controller
+  description: User Controller
+paths:
+  /Me:
+    get:
+      tags:
+      - user-account-controller
+      summary: getAccountHolderById
+      operationId: getAccountHolderByIdUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountHolder'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /Me/cdAccounts:
+    get:
+      tags:
+      - user-account-controller
+      summary: getCDAccounts
+      operationId: getCDAccountsUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CDAccountRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - user-account-controller
+      summary: addCDAccount
+      operationId: addCDAccountUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      - in: body
+        name: cdAccount
+        description: cdAccount
+        required: true
+        schema:
+          $ref: '#/definitions/CDAccountReq'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/CDAccountRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /Me/checkingAccounts:
+    get:
+      tags:
+      - user-account-controller
+      summary: getCheckingAccounts
+      operationId: getCheckingAccountsUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CheckingAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - user-account-controller
+      summary: addCheckingAccount
+      operationId: addCheckingAccountUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      - in: body
+        name: checkingAccount
+        description: checkingAccount
+        required: true
+        schema:
+          $ref: '#/definitions/CheckingAccount'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/CheckingAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /Me/savingsAccounts:
+    get:
+      tags:
+      - user-account-controller
+      summary: getSavingsAccounts
+      operationId: getSavingsAccountsUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SavingsAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - user-account-controller
+      summary: addSavingsAccount
+      operationId: addSavingsAccountUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization
+        required: true
+        type: string
+      - in: body
+        name: savingsAccount
+        description: savingsAccount
+        required: true
+        schema:
+          $ref: '#/definitions/SavingsAccount'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/SavingsAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /accountHolders:
+    get:
+      tags:
+      - account-holder-controller
+      summary: getAccountHolders
+      operationId: getAccountHoldersUsingGET
+      produces:
+      - '*/*'
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountHolderRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - account-holder-controller
+      summary: addAccountHolder
+      operationId: addAccountHolderUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: accountHolder
+        description: accountHolder
+        required: true
+        schema:
+          $ref: '#/definitions/AccountHolderReq'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/AccountHolderRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /accountHolders/{customerId}:
+    get:
+      tags:
+      - account-holder-controller
+      summary: getAccountHolderById
+      operationId: getAccountHolderByIdUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountHolderRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /accountHolders/{customerId}/cdAccounts:
+    get:
+      tags:
+      - bank-account-controller
+      summary: getCDAccounts
+      operationId: getCDAccountsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CDAccountRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - bank-account-controller
+      summary: addCDAcc
+      operationId: addCDAccUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: cdAccount
+        description: cdAccount
+        required: true
+        schema:
+          $ref: '#/definitions/CDAccountReq'
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/CDAccountRes'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /accountHolders/{customerId}/checkingAccounts:
+    get:
+      tags:
+      - bank-account-controller
+      summary: getCheckingAccounts
+      operationId: getCheckingAccountsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CheckingAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - bank-account-controller
+      summary: addCheckingAcc
+      operationId: addCheckingAccUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: checkingAccount
+        description: checkingAccount
+        required: true
+        schema:
+          $ref: '#/definitions/CheckingAccount'
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/CheckingAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /accountHolders/{customerId}/savingsAccounts:
+    get:
+      tags:
+      - bank-account-controller
+      summary: getSavingsAccounts
+      operationId: getSavingsAccountsUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SavingsAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - bank-account-controller
+      summary: addSavingsAcc
+      operationId: addSavingsAccUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: customerId
+        in: path
+        description: customerId
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: savingsAccount
+        description: savingsAccount
+        required: true
+        schema:
+          $ref: '#/definitions/SavingsAccount'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/SavingsAccount'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /authenticate:
+    post:
+      tags:
+      - login-controller
+      summary: createAuthenticationToken
+      operationId: createAuthenticationTokenUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: authenticationRequest
+        description: authenticationRequest
+        required: true
+        schema:
+          $ref: '#/definitions/AuthenticationRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /authenticate/createUser:
+    post:
+      tags:
+      - user-controller
+      summary: createUser
+      operationId: createUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: user
+        description: user
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/User'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /cdOfferings:
+    get:
+      tags:
+      - cd-offering-controller
+      summary: getCDOfferings
+      operationId: getCDOfferingsUsingGET
+      produces:
+      - '*/*'
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CDOffering'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    post:
+      tags:
+      - cd-offering-controller
+      summary: addCDOffering
+      operationId: addCDOfferingUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: cdOffering
+        description: cdOffering
+        required: true
+        schema:
+          $ref: '#/definitions/CDOffering'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/CDOffering'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  /cdOfferings/{cdOfferingId}:
+    get:
+      tags:
+      - cd-offering-controller
+      summary: getCDOfferingById
+      operationId: getCDOfferingByIdUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cdOfferingId
+        in: path
+        description: cdOfferingId
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/CDOffering'
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+definitions:
+  AccountHolder:
+    type: object
+    required:
+    - contact
+    - firstName
+    - lastName
+    - ssn
+    properties:
+      cdaccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CDAccountRes'
+      cdbalance:
+        type: number
+        format: double
+      checkingAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CheckingAccount'
+      checkingBalance:
+        type: number
+        format: double
+      combinedBalance:
+        type: number
+        format: double
+      contact:
+        $ref: '#/definitions/AccountHolderContactDetails'
+      firstName:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      middleName:
+        type: string
+      numberOfCDAccounts:
+        type: integer
+        format: int32
+      numberOfCheckingAccounts:
+        type: integer
+        format: int32
+      numberOfSavingsAccounts:
+        type: integer
+        format: int32
+      savingsAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/SavingsAccount'
+      savingsBalance:
+        type: number
+        format: double
+      ssn:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+    title: AccountHolder
+  AccountHolderContactDetails:
+    type: object
+    properties:
+      accountHolderId:
+        type: integer
+        format: int64
+      city:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      phone:
+        type: string
+      state:
+        type: string
+      street:
+        type: string
+      zip:
+        type: string
+    title: AccountHolderContactDetails
+  AccountHolderReq:
+    type: object
+    required:
+    - contact
+    - firstName
+    - lastName
+    - ssn
+    properties:
+      cdaccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CDAccountReq'
+      checkingAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CheckingAccount'
+      contact:
+        $ref: '#/definitions/AccountHolderContactDetails'
+      firstName:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      middleName:
+        type: string
+      savingsAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/SavingsAccount'
+      ssn:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+    title: AccountHolderReq
+  AccountHolderRes:
+    type: object
+    required:
+    - contact
+    - firstName
+    - lastName
+    - ssn
+    properties:
+      cdaccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CDAccountRes'
+      cdbalance:
+        type: number
+        format: double
+      checkingAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/CheckingAccount'
+      checkingBalance:
+        type: number
+        format: double
+      combinedBalance:
+        type: number
+        format: double
+      contact:
+        $ref: '#/definitions/AccountHolderContactDetails'
+      firstName:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      middleName:
+        type: string
+      numberOfCDAccounts:
+        type: integer
+        format: int32
+      numberOfCheckingAccounts:
+        type: integer
+        format: int32
+      numberOfSavingsAccounts:
+        type: integer
+        format: int32
+      savingsAccounts:
+        type: array
+        items:
+          $ref: '#/definitions/SavingsAccount'
+      savingsBalance:
+        type: number
+        format: double
+      ssn:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+    title: AccountHolderRes
+  AuthenticationRequest:
+    type: object
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    title: AuthenticationRequest
+  CDAccountReq:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      cdOffering:
+        $ref: '#/definitions/CDOffering'
+      interestRate:
+        $ref: '#/definitions/CDOffering'
+      openedOn:
+        type: string
+        format: date-time
+      term:
+        type: integer
+        format: int32
+    title: CDAccountReq
+  CDAccountRes:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      cdOffering:
+        $ref: '#/definitions/CDOffering'
+      interestRate:
+        type: number
+        format: double
+      openedOn:
+        type: string
+        format: date-time
+      term:
+        type: integer
+        format: int32
+    title: CDAccountRes
+  CDOffering:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      interestRate:
+        type: number
+        format: double
+        minimum: 0
+        maximum: 0.9999
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      term:
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 9223372036854776000
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+    title: CDOffering
+  CheckingAccount:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      interestRate:
+        type: number
+        format: double
+      openedOn:
+        type: string
+        format: date-time
+    title: CheckingAccount
+  SavingsAccount:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      interestRate:
+        type: number
+        format: double
+      openedOn:
+        type: string
+        format: date-time
+    title: SavingsAccount
+  User:
+    type: object
+    properties:
+      active:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    title: User
