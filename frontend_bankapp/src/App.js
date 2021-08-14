@@ -1,64 +1,31 @@
+import React, { Component } from 'react';
+import Main from './pages/Main';
 import './App.css';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Nav from './components/Nav';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { SyntheticEvent, useState } from "react";
-import { useEffect } from "react"
+import { BrowserRouter } from 'react-router-dom';
+// import { ACCOUNT_HOLDERS } from './shared/accountHolders';
+// import Home from './pages/Home';
 
-function App() {
-  const [firstName, setFirstName] = useState('');
-  // const token = JSON.parse(sessionStorage.getItem('jwt'));
-  // console.log(token);
-  // const h = new Headers();
-  // h.append('Authentication', 'Bearer ${token}');
+class App extends Component {
 
-  useEffect(() => {
-    (
-      async () => {
-        const url = 'http://localhost:8080/Me';
-        const token = JSON.parse(sessionStorage.getItem('jwt'));
-        console.log("token is = " + token);
-        const h = new Headers();
-        h.append('Authentication', 'Bearer ${token}');
+  // constructor(props) {
+  //   super(props);
 
-        const requestOptions = {
-          method: 'GET',
-          mode: 'cors',
-          headers: h,
-        };
+  //   this.state = {
+  //     checkingAccounts: ACCOUNT_HOLDERS[0].checkingAccounts
+  //   }
+  //   console.log(ACCOUNT_HOLDERS[0].checkingAccounts)
+  // }
 
-        await fetch(new Request(url, requestOptions))
-          .then(response => response.json())
-          .then(content => {
-              console.log(content[0]);
-          })
-          .catch(err => {
-              console.error(err.message);
-          })
-
-        // setFirstName(content.firstName);
-        
-      }
-    )();
-  });
-
-  return (
-    <div className="App">
+  render() {
+    return (
       <BrowserRouter>
-        <Nav firstName={firstName} setFirstName={setFirstName} />
-
-        <main className="form-signin">
-
-          <Route path='/' exact component={() => <Home firstName={firstName} />} />
-          <Route path='/login' component={() => <Login setFirstName={setFirstName} />} />
-          <Route path='/register' component={Register} />
-
-        </main>
+        <div>
+          <Main />
+        </div>
       </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
+
 
 export default App;
